@@ -7,6 +7,7 @@ package dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JComboBox;
 import model.Cargo;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -20,7 +21,7 @@ import util.ServiceAPI;
 public class CargoDAO {
     private List lista;
     
-    public List<Cargo> lista(){
+    public void getLista( JComboBox combo ){
         lista = new ArrayList<>();
         ServiceAPI serviceAPI = ServiceAPI.retrofit.create(ServiceAPI.class);
         Call<List<Cargo>> listCargoCall = serviceAPI.listaCargo();
@@ -29,7 +30,11 @@ public class CargoDAO {
             public void onResponse(Call<List<Cargo>> call, Response<List<Cargo>> rspns) {
                 if( rspns.isSuccessful() ){
                     List<Cargo> lstEmp = rspns.body();
-                    lista.addAll( lstEmp );
+                    combo.removeAllItems();
+                    combo.addItem( "Selecione" );
+                    for( Cargo cargo : lstEmp ){
+                        combo.addItem( cargo );
+                    }
                 }
             }
 
@@ -39,6 +44,6 @@ public class CargoDAO {
             }
         } );
         
-        return lista;
+        
     }
 }

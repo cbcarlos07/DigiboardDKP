@@ -74,5 +74,8 @@ public class Pessoa {
         this.cargo = cargo;
     }
     
-    
+    @Override
+    public String toString(){
+        return nm_pessoa;
+    }
 }

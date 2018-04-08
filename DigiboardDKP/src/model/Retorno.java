@@ -3,21 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
-
-import dao.CargoDAO;
-import javax.swing.JComboBox;
+package model;
 
 /**
  *
  * @author carlos
  */
-public class CargoController {
-    CargoDAO ed = new CargoDAO();
-    
-    public void getLista( JComboBox combo ){
-         ed.getLista(combo);
-         
+public class Retorno {
+    private boolean retorno;
+
+    public boolean isRetorno() {
+        return retorno;
     }
+
+    public void setRetorno(boolean retorno) {
+        this.retorno = retorno;
+    }
+    
     
 }

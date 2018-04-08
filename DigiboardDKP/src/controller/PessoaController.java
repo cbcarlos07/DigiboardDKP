@@ -6,8 +6,8 @@
 package controller;
 
 import dao.PessoaDAO;
-import java.util.List;
-import model.Pessoa;
+import javax.swing.JComboBox;
+import javax.swing.JTable;
 
 /**
  *
@@ -16,9 +16,32 @@ import model.Pessoa;
 public class PessoaController {
     PessoaDAO ed = new PessoaDAO();
     
-    public List<Pessoa> lista( String[] values ){
-         List lista = ed.lista( values );
-         return lista;
+    public void geLista( String[] values, JTable tabela ){
+          ed.getLista(values, tabela );
+         
+    }
+         
+    public void geListas( JComboBox combo  ){
+         ed.getListaPessoas( combo );
+         
+    }
+    
+    public void geListaTelfone( JComboBox combo  ){
+         ed.getListaTelefone(combo );
+         
+    }
+    
+    public void geListasEmail( JComboBox combo  ){
+         ed.getListaEmail(combo );
+         
+    }
+    
+    public void getListaNome( String values, JTable tabela ){
+        ed.getListaNome(values, tabela);
+    }
+    
+    public void  delete( JTable tabela, String codigo ){
+        ed.delete(tabela, codigo );
     }
     
 }

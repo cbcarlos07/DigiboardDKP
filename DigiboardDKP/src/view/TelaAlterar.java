@@ -3,21 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
+package view;
 
-import dao.CargoDAO;
-import javax.swing.JComboBox;
+import javax.swing.JInternalFrame;
 
 /**
  *
  * @author carlos
  */
-public class CargoController {
-    CargoDAO ed = new CargoDAO();
+public class TelaAlterar extends JInternalFrame{
     
-    public void getLista( JComboBox combo ){
-         ed.getLista(combo);
-         
+    
+    private void initComponentes(){
+        
     }
-    
 }

@@ -8,7 +8,7 @@ package digiboarddkp;
 import controller.EmpresaController;
 import controller.SetorController;
 import java.util.List;
-import model.Empresa;
+import javax.swing.JComboBox;
 import model.Setor;
 import view.TelaPrincipal;
 
@@ -28,18 +28,15 @@ public class DigiboardDKP {
     }
     private static void carregarEmpresa(){
          EmpresaController ec = new EmpresaController();
-         List<Empresa> lista = ec.lista();   
-         for ( Empresa empresa : lista ){
-             System.out.println(" Emrpesa ini:  "+empresa.toString());
-         }
+         JComboBox combo = new JComboBox();
+         ec.getLista(combo);
+         
     }
     
     private static void carregarSetor(){
          SetorController ec = new SetorController();
-         List<Setor> lista = ec.lista();   
-         for ( Setor setor : lista ){
-             System.out.println(" Setor:  "+setor.getNm_setor());
-         }
+         JComboBox combo = new JComboBox();
+         ec.getLista(combo);
     }
     public static void main(String[] args) {
         carregar();

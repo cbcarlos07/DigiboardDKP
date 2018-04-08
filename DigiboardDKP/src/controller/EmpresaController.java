@@ -7,6 +7,7 @@ package controller;
 
 import dao.EmpresaDAO;
 import java.util.List;
+import javax.swing.JComboBox;
 import model.Empresa;
 
 /**
@@ -16,9 +17,9 @@ import model.Empresa;
 public class EmpresaController {
     EmpresaDAO ed = new EmpresaDAO();
     
-    public List<Empresa> lista(  ){
-         List<Empresa> lista = ed.lista();
-         return lista;
+    public void getLista( JComboBox combo ){
+         ed.getList( combo );
+         
     }
     
 }

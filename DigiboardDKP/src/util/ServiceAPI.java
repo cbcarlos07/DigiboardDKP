@@ -9,6 +9,7 @@ import java.util.List;
 import model.Cargo;
 import model.Empresa;
 import model.Pessoa;
+import model.Retorno;
 import model.Setor;
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -47,6 +48,29 @@ public interface ServiceAPI {
                                     @Field("email") String email,
                                     @Field("cargo") String cargo
                                    );
+    
+    @POST("pessoa/lista")        
+    Call<List<Pessoa>> listaPessoas(  );
+    
+    @POST("pessoa/nome")      
+    @FormUrlEncoded        
+    Call<List<Pessoa>> listaPessoaNome( @Field("nome") String nome);
+    
+    @POST("pessoa/delete")      
+    @FormUrlEncoded        
+    Call<Retorno> deleteNome( @Field("codigo") String codigo);
+    
+    @POST("pessoa/edit")      
+    @FormUrlEncoded        
+    Call<Retorno> edit( @Field("codigo") String codigo,
+                                    @Field("nome") String nome,
+                                    @Field("telefone") String telefone,
+                                    @Field("empresa") String empresa,
+                                    @Field("setor") String setor,
+                                    @Field("email") String email,
+                                    @Field("cargo") String cargo
+                                   );
+    
 }
     
 

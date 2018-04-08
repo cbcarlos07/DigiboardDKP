@@ -7,6 +7,7 @@ package controller;
 
 import dao.SetorDAO;
 import java.util.List;
+import javax.swing.JComboBox;
 import model.Setor;
 
 /**
@@ -16,9 +17,9 @@ import model.Setor;
 public class SetorController {
     SetorDAO ed = new SetorDAO();
     
-    public List<Setor> lista(  ){
-         List lista = ed.lista();
-         return lista;
+    public void getLista( JComboBox combo ){
+         ed.getLista(combo );
+         
     }
     
 }

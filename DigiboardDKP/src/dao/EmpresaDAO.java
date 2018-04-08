@@ -7,6 +7,7 @@ package dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JComboBox;
 import model.Empresa;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -20,19 +21,21 @@ import util.ServiceAPI;
 public class EmpresaDAO {
     List<Empresa> lista = null;
     
-    public List<Empresa> lista(){
+    public void getList( JComboBox combo ){
         lista = new ArrayList();
         ServiceAPI serviceAPI = ServiceAPI.retrofit.create(ServiceAPI.class);
         Call<List<Empresa>> listEmpresaCall = serviceAPI.listaEmpresa();
         listEmpresaCall.enqueue( new Callback<List<Empresa>>() {
-            @Override
+           
             public void onResponse(Call<List<Empresa>> call, Response<List<Empresa>> rspns) {
                 if( rspns.isSuccessful() ){
                     List<Empresa> lstTemp = rspns.body();
-                    lista.addAll( lstTemp );
-                    for( Empresa empresa: lista ){
-                        System.out.println("Empresa dao: "+empresa.toString());
+                    combo.removeAllItems();
+                    combo.addItem( "Selecione" );
+                    for( Empresa empresa : lstTemp ){
+                        combo.addItem( empresa );
                     }
+                    
                     
                 }
                     
@@ -46,6 +49,8 @@ public class EmpresaDAO {
          for( Empresa empresa: lista ){
                         System.out.println("Empresa 1: "+empresa.getNm_empresa());
          }
-        return lista;
+        
     }
+    
+    
 }

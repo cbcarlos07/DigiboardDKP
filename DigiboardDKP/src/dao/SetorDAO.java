@@ -7,6 +7,7 @@ package dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JComboBox;
 import model.Setor;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -20,7 +21,7 @@ import util.ServiceAPI;
 public class SetorDAO {
     private List lista;
     
-    public List<Setor> lista(){
+    public void getLista( JComboBox combo ){
         lista = new ArrayList<>();
         ServiceAPI serviceAPI = ServiceAPI.retrofit.create(ServiceAPI.class);
         Call<List<Setor>> listSetorCall = serviceAPI.listaSetor();
@@ -29,7 +30,11 @@ public class SetorDAO {
             public void onResponse(Call<List<Setor>> call, Response<List<Setor>> rspns) {
                 if( rspns.isSuccessful() ){
                     List<Setor> lstEmp = rspns.body();
-                    lista.addAll( lstEmp );
+                    combo.removeAllItems();
+                    combo.addItem( "Selecione" );
+                    for( Setor setor :lstEmp ){
+                        combo.addItem( setor );
+                    }
                 }
             }
 
@@ -39,6 +44,6 @@ public class SetorDAO {
             }
         } );
         
-        return lista;
+        
     }
 }
