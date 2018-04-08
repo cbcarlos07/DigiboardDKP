@@ -18,27 +18,34 @@ import util.ServiceAPI;
  * @author carlos
  */
 public class EmpresaDAO {
-    private List lista;
+    List<Empresa> lista = null;
     
     public List<Empresa> lista(){
-        lista = new ArrayList<>();
+        lista = new ArrayList();
         ServiceAPI serviceAPI = ServiceAPI.retrofit.create(ServiceAPI.class);
         Call<List<Empresa>> listEmpresaCall = serviceAPI.listaEmpresa();
         listEmpresaCall.enqueue( new Callback<List<Empresa>>() {
             @Override
             public void onResponse(Call<List<Empresa>> call, Response<List<Empresa>> rspns) {
                 if( rspns.isSuccessful() ){
-                    List<Empresa> lstEmp = rspns.body();
-                    lista.addAll( lstEmp );
+                    List<Empresa> lstTemp = rspns.body();
+                    lista.addAll( lstTemp );
+                    for( Empresa empresa: lista ){
+                        System.out.println("Empresa dao: "+empresa.toString());
+                    }
+                    
                 }
+                    
             }
 
             @Override
             public void onFailure(Call<List<Empresa>> call, Throwable thrwbl) {
-                System.out.println("Não foi possivel obter dados");
+                System.out.println("Nao foi possivel obter dados");
             }
         } );
-        
+         for( Empresa empresa: lista ){
+                        System.out.println("Empresa 1: "+empresa.getNm_empresa());
+         }
         return lista;
     }
 }

@@ -10,8 +10,13 @@ package model;
  * @author carlos
  */
 public class Empresa {
+    
     private int cd_empresa;
+    
     private String nm_empresa;
+    
+    
+    
 
     public int getCd_empresa() {
         return cd_empresa;
@@ -33,6 +38,8 @@ public class Empresa {
     public String toString() {
         return nm_empresa;
     }
+
+    
    
     
     

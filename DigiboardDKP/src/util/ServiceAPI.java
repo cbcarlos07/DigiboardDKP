@@ -8,12 +8,14 @@ package util;
 import java.util.List;
 import model.Cargo;
 import model.Empresa;
+import model.Pessoa;
 import model.Setor;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.GET;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
+import retrofit2.http.Field;
 
 /**
  *
@@ -35,6 +37,16 @@ public interface ServiceAPI {
     
     @POST("cargo")      
     Call<List<Cargo>> listaCargo();
+    
+    @POST("pessoa")      
+    @FormUrlEncoded        
+    Call<List<Pessoa>> listaPessoa( @Field("nome") String nome,
+                                    @Field("telefone") String telefone,
+                                    @Field("empresa") String empresa,
+                                    @Field("setor") String setor,
+                                    @Field("email") String email,
+                                    @Field("cargo") String cargo
+                                   );
 }
     
 

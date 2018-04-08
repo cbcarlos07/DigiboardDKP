@@ -5,9 +5,12 @@
  */
 package digiboarddkp;
 
-import controller.CargoController;
+import controller.EmpresaController;
+import controller.SetorController;
 import java.util.List;
-import model.Cargo;
+import model.Empresa;
+import model.Setor;
+import view.TelaPrincipal;
 
 /**
  *
@@ -18,17 +21,29 @@ public class DigiboardDKP {
     /**
      * @param args the command line arguments
      */
-    private static void teste(  ){
-        CargoController ec = new CargoController();
-        List<Cargo> lista = ec.lista();
-        lista.stream().forEach((emp) -> {
-            System.out.println("Cargo: "+emp.getDs_cargo());
-        });
-        System.exit(0);
+    private static void carregar(){
+       
+        carregarEmpresa();
+        carregarSetor();
+    }
+    private static void carregarEmpresa(){
+         EmpresaController ec = new EmpresaController();
+         List<Empresa> lista = ec.lista();   
+         for ( Empresa empresa : lista ){
+             System.out.println(" Emrpesa ini:  "+empresa.toString());
+         }
     }
     
+    private static void carregarSetor(){
+         SetorController ec = new SetorController();
+         List<Setor> lista = ec.lista();   
+         for ( Setor setor : lista ){
+             System.out.println(" Setor:  "+setor.getNm_setor());
+         }
+    }
     public static void main(String[] args) {
-        teste();
+        carregar();
+        new TelaPrincipal().setVisible( true );
     }
     
 }

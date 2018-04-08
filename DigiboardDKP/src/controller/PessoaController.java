@@ -5,19 +5,19 @@
  */
 package controller;
 
-import dao.EmpresaDAO;
+import dao.PessoaDAO;
 import java.util.List;
-import model.Empresa;
+import model.Pessoa;
 
 /**
  *
  * @author carlos
  */
-public class EmpresaController {
-    EmpresaDAO ed = new EmpresaDAO();
+public class PessoaController {
+    PessoaDAO ed = new PessoaDAO();
     
-    public List<Empresa> lista(  ){
-         List<Empresa> lista = ed.lista();
+    public List<Pessoa> lista( String[] values ){
+         List lista = ed.lista( values );
          return lista;
     }
     
