@@ -60,9 +60,23 @@ public interface ServiceAPI {
     @FormUrlEncoded        
     Call<Retorno> deleteNome( @Field("codigo") String codigo);
     
+    @POST("pessoa/dado")      
+    @FormUrlEncoded        
+    Call<Pessoa> getDados( @Field("codigo") String codigo);
+    
     @POST("pessoa/edit")      
     @FormUrlEncoded        
     Call<Retorno> edit( @Field("codigo") String codigo,
+                                    @Field("nome") String nome,
+                                    @Field("telefone") String telefone,
+                                    @Field("empresa") String empresa,
+                                    @Field("setor") String setor,
+                                    @Field("email") String email,
+                                    @Field("cargo") String cargo
+                                   );
+    @POST("pessoa/add")      
+    @FormUrlEncoded        
+    Call<Retorno> edit( 
                                     @Field("nome") String nome,
                                     @Field("telefone") String telefone,
                                     @Field("empresa") String empresa,

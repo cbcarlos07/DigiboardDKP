@@ -69,13 +69,13 @@ public class TelaPessoas extends JInternalFrame {
         addWindowListener(new WindowAdapter() {
 
 			public void windowClosing(WindowEvent e) {
-				System.exit(0);
+				dispose();
 			}
 		});
         setClosable(true);
         setIconifiable(true);
        // setMaximizable(true);
-        setResizable(true);
+       // setResizable(true);
         
         jPanel = new JPanel( null  );
         jPanel.setBorder(
@@ -221,11 +221,23 @@ public class TelaPessoas extends JInternalFrame {
         jBAdicionar = new JButton( "Adicionar" );
         jBAdicionar.setBounds(10, 10, 130, 30);
         jPanelAction.add( jBAdicionar );
+        jBAdicionar.addActionListener( new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                jBAdcionarActionPerformed(ae);
+            }
+        } );
         
         jBAlterar = new JButton( "Alterar" );
         jBAlterar.setBounds(180, 10, 130, 30);
         jBAlterar.setEnabled( false );
         jPanelAction.add( jBAlterar );
+        jBAlterar.addActionListener( new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                JBAlterarActionPerfomed(ae);
+            }
+        } );
         
         
         jbExcluir = new JButton( "Excluir" );
@@ -263,6 +275,12 @@ public class TelaPessoas extends JInternalFrame {
         SetorController sc = new SetorController();
         sc.getLista(jComboSetor);
         
+    }
+    
+    private void jBAdcionarActionPerformed( ActionEvent ae){
+        TelaCadastrar tela =  new TelaCadastrar( tabela );
+        TelaPrincipal.desktopPane.add( tela );
+        tela.setVisible( true );
     }
     
     private void preencherComboCargo(  ){
@@ -385,10 +403,21 @@ public class TelaPessoas extends JInternalFrame {
         
     }
     
+    private void JBAlterarActionPerfomed( ActionEvent ae ){
+        telaEditar();
+    }
+    
     private void deletar(){
         String codigo =  tabela.getValueAt( tabela.getSelectedRow() , 0 ).toString();
         PessoaController pc = new PessoaController();
         pc.delete(tabela, codigo);
+    }
+    
+    private void telaEditar(){
+        String codigo = tabela.getValueAt(tabela.getSelectedRow(), 0).toString();
+        TelaAlterar tela = new TelaAlterar(tabela, codigo);
+        TelaPrincipal.desktopPane.add(tela);
+        tela.setVisible(true);
     }
   
 }

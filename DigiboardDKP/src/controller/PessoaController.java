@@ -7,7 +7,9 @@ package controller;
 
 import dao.PessoaDAO;
 import javax.swing.JComboBox;
+import javax.swing.JInternalFrame;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 
 /**
  *
@@ -42,6 +44,19 @@ public class PessoaController {
     
     public void  delete( JTable tabela, String codigo ){
         ed.delete(tabela, codigo );
+    }
+    
+    public void  add( String[] values, JTable tabela, JInternalFrame tela ){
+        ed.add(values, tabela, tela);
+    }
+    public void  edit( String[] values, JTable tabela, JInternalFrame tela ){
+        ed.edit(values, tabela, tela);
+    }
+    
+    public void  get( JTextField nome, JTextField telefone, JTextField email, 
+                       JComboBox empresa, JComboBox setor, JComboBox cargo, String codigo
+                     ){
+        ed.get(nome, telefone, email, empresa, setor, cargo, codigo);
     }
     
 }

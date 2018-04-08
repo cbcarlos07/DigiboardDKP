@@ -6,9 +6,7 @@
 package controller;
 
 import dao.EmpresaDAO;
-import java.util.List;
 import javax.swing.JComboBox;
-import model.Empresa;
 
 /**
  *
@@ -21,5 +19,7 @@ public class EmpresaController {
          ed.getList( combo );
          
     }
+    
+    
     
 }

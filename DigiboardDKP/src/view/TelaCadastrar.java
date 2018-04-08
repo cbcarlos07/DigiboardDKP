@@ -30,7 +30,7 @@ import model.Setor;
  *
  * @author carlos
  */
-public class TelaAlterar extends JInternalFrame{
+public class TelaCadastrar extends JInternalFrame{
     private JPanel painel;
     
     private JLabel jlNome;
@@ -53,12 +53,9 @@ public class TelaAlterar extends JInternalFrame{
     private JButton jbCancelar;
     
     private final JTable tabela;
-    private final String codigo;
-    public TelaAlterar( JTable table, String code ){
+    public TelaCadastrar( JTable table ){
         initComponentes();
         tabela = table;
-        codigo = code;
-        preecherCampos();
     }
     
     private void initComponentes(){
@@ -237,26 +234,15 @@ public class TelaAlterar extends JInternalFrame{
         String cargo         = String.valueOf( objCargo.getCd_cargo() );
         
         PessoaController pc = new PessoaController();
-        String[] values = new String[7];
-        values[0] = codigo;
-        values[1] = nome;
-        values[2] = telefone;
-        values[3] = empresa;
-        values[4] = setor;
-        values[5] = email;
-        values[6] = cargo;
-        pc.edit(values, tabela, this);
+        String[] values = new String[6];
+        values[0] = nome;
+        values[1] = telefone;
+        values[2] = empresa;
+        values[3] = setor;
+        values[4] = email;
+        values[5] = cargo;
+        pc.add(values, tabela, this);
         
-        
-    }
-    
-    private void preecherCampos(  ){
-        
-       PessoaController pc = new PessoaController();
-       
-       
-       pc.get(jTNome, jTTelefone, jTEmail, jCEmpresa, jCSetor, jCCargo, codigo);
-       
         
     }
     

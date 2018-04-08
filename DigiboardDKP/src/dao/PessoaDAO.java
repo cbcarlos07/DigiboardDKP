@@ -8,7 +8,10 @@ package dao;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JComboBox;
+import javax.swing.JInternalFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import model.Pessoa;
 import model.Retorno;
@@ -212,7 +215,7 @@ public class PessoaDAO {
         
     }
         
-     public void  edit( String[] values, JTable tabela  ){
+     public void  edit( String[] values, JTable tabela, JInternalFrame tela  ){
         lista = new ArrayList<>();
         ServiceAPI serviceAPI = ServiceAPI.retrofit.create(ServiceAPI.class);
         Call<Retorno> listPessoaCall = serviceAPI.edit(values[0], 
@@ -226,6 +229,38 @@ public class PessoaDAO {
             @Override
             public void onResponse(Call<Retorno> call, Response<Retorno> rspns) {
                 if( rspns.isSuccessful() ){
+                    JOptionPane.showMessageDialog(null, "Operação efetuada com sucesso!");
+                    tela.dispose();;;
+                    getListaNome("%", tabela);
+                 }
+                    
+                
+            }
+
+            @Override
+            public void onFailure(Call<Retorno> call, Throwable thrwbl) {
+                System.out.println("Não foi possivel obter dados");
+            }
+        } );
+        
+        
+    }
+     
+     public void  add( String[] values, JTable tabela, JInternalFrame tela  ){
+        lista = new ArrayList<>();
+        ServiceAPI serviceAPI = ServiceAPI.retrofit.create(ServiceAPI.class);
+        Call<Retorno> listPessoaCall = serviceAPI.edit(values[0], 
+                                                        values[1], 
+                                                        values[2], 
+                                                        values[3], 
+                                                        values[4],
+                                                        values[5]);
+        listPessoaCall.enqueue( new Callback<Retorno>() {
+            @Override
+            public void onResponse(Call<Retorno> call, Response<Retorno> rspns) {
+                if( rspns.isSuccessful() ){
+                    JOptionPane.showMessageDialog(null, "Operação efetuada com sucesso!");
+                    tela.dispose();;
                     System.out.println(rspns.body().toString());
                     getListaNome("%", tabela);
                  }
@@ -235,6 +270,39 @@ public class PessoaDAO {
 
             @Override
             public void onFailure(Call<Retorno> call, Throwable thrwbl) {
+                System.out.println("Não foi possivel obter dados");
+            }
+        } );
+        
+        
+    }
+     
+     public void  get( JTextField nome, JTextField telefone, JTextField email, 
+                       JComboBox empresa, JComboBox setor, JComboBox cargo, String codigo
+                     ){
+        lista = new ArrayList<>();
+        ServiceAPI serviceAPI = ServiceAPI.retrofit.create(ServiceAPI.class);
+        Call<Pessoa> listPessoaCall = serviceAPI.getDados( codigo );
+        listPessoaCall.enqueue( new Callback<Pessoa>() {
+            @Override
+            public void onResponse(Call<Pessoa> call, Response<Pessoa> rspns) {
+                if( rspns.isSuccessful() ){
+                    
+                    Pessoa pessoa = rspns.body();
+                    nome.setText( pessoa.getNm_pessoa() );
+                    telefone.setText( pessoa.getTelefone() );
+                    
+                    empresa.setSelectedItem( pessoa.getEmpresa() );
+                    setor.setSelectedItem( pessoa.getSetor() );
+                    email.setText( pessoa.getEmail() );
+                    cargo.setSelectedItem( pessoa.getCargo() );
+                 }
+                    
+                
+            }
+
+            @Override
+            public void onFailure(Call<Pessoa> call, Throwable thrwbl) {
                 System.out.println("Não foi possivel obter dados");
             }
         } );
