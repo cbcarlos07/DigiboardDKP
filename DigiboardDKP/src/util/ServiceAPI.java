@@ -11,6 +11,7 @@ import model.Empresa;
 import model.Pessoa;
 import model.Retorno;
 import model.Setor;
+import model.Total;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -35,6 +36,9 @@ public interface ServiceAPI {
     
     @POST("setor")      
     Call<List<Setor>> listaSetor();
+    
+    @POST("pessoa/total")      
+    Call<List<Total>> listaTotal();
     
     @POST("cargo")      
     Call<List<Cargo>> listaCargo();

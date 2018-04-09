@@ -39,7 +39,7 @@ public class TelaPrincipal extends JFrame{
         
         //Adding menuItem on menubar
         JMenu jmFile = new JMenu( "File" );        
-        JMenu jmList = new JMenu( "People" );        
+        JMenu jmList = new JMenu( "Options" );        
         menuBar.add( jmFile );
         menuBar.add( jmList );
         
@@ -60,6 +60,15 @@ public class TelaPrincipal extends JFrame{
         jmList.add( jmPessoas );
         
         
+        JMenuItem jmCargo = new JMenuItem( "Total por Cargo" );
+        jmCargo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.ALT_MASK));
+        jmCargo.addActionListener((ActionEvent ae) -> {
+            jmTotaisActionPerformed( ae );
+        });
+        
+        jmList.add( jmCargo );
+        
+        
         desktopPane = new JDesktopPane();
         this.getContentPane().add( desktopPane );
         
@@ -73,11 +82,22 @@ public class TelaPrincipal extends JFrame{
      private void jmPessoasActionPerformed( ActionEvent ae ){
         chamarTelaPessoas();
     }
+     
+      private void jmTotaisActionPerformed( ActionEvent ae ){
+        chamarTelaTotais();
+    }
+    
     
     
     
     private void chamarTelaPessoas(){
         TelaPessoas people = new TelaPessoas();
+        desktopPane.add(people);
+        people.setVisible( true );
+    }
+    
+      private void chamarTelaTotais(){
+        TelaTotais people = new TelaTotais();
         desktopPane.add(people);
         people.setVisible( true );
     }

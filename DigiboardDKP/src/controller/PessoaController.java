@@ -59,4 +59,8 @@ public class PessoaController {
         ed.get(nome, telefone, email, empresa, setor, cargo, codigo);
     }
     
+    public void getTotal( JTable tabela ){
+        ed.getTotal(tabela);
+    }
+    
 }

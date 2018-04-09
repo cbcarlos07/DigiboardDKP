@@ -15,6 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import model.Pessoa;
 import model.Retorno;
+import model.Total;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -63,6 +64,40 @@ public class PessoaDAO {
 
             @Override
             public void onFailure(Call<List<Pessoa>> call, Throwable thrwbl) {
+                System.out.println("Não foi possivel obter dados");
+            }
+        } );
+        
+        
+    }
+    
+    
+    
+    public void getTotal( JTable tabela ){
+        lista = new ArrayList<>();
+        ServiceAPI serviceAPI = ServiceAPI.retrofit.create(ServiceAPI.class);
+        Call<List<Total>> listPessoaCall = serviceAPI.listaTotal( );
+        listPessoaCall.enqueue( new Callback<List<Total>>() {
+            @Override
+            public void onResponse(Call<List<Total>> call, Response<List<Total>> rspns) {
+                if( rspns.isSuccessful() ){
+                    List<Total> lstEmp = rspns.body(); // objeto com nome fixo para reaproveitar codigo
+                    
+                    DefaultTableModel tm = (DefaultTableModel) tabela.getModel();
+                    tm.setNumRows(0);
+                    for( Total total : lstEmp ){
+                        tm.addRow( new String[]{
+                           total.getDs_cargo(),
+                           ""+total.getTotal()
+                        } );
+                    }
+                    
+                    
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Total>> call, Throwable thrwbl) {
                 System.out.println("Não foi possivel obter dados");
             }
         } );
