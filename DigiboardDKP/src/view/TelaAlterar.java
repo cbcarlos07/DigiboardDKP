@@ -66,7 +66,7 @@ public class TelaAlterar extends JInternalFrame{
         //w, h
         this.setSize(850, 335);
         this.setLayout( null );
-        this.setTitle( "Cadastrar Pessoa" );
+        this.setTitle( "Alterar Cadastro Pessoa" );
         addWindowListener(new WindowAdapter() {
 
 			public void windowClosing(WindowEvent e) {
